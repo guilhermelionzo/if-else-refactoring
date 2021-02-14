@@ -8,7 +8,6 @@ namespace bar
         private readonly Func<string> _inputProvider;
         private readonly Action<string> _outputProvider;
         private readonly RecipeBook _recipeBook;
-        private void UnavailableDrink(string drink) => _outputProvider($"Sorry bro, but we do not do {drink}");
 
         public Bartender(Func<string> inputProvider, Action<string> outputProvider, RecipeBook recipeBook = null)
         {
@@ -23,9 +22,11 @@ namespace bar
 
             var drink = _inputProvider() ?? string.Empty;
 
-            if (!_recipeBook.GetAvailableDrinkNames().Contains(drink)) UnavailableDrink(drink);
+            if (_recipeBook.GetAvailableDrinkNames().Contains(drink)) _recipeBook.MakeRecipe(drink);
 
-            _recipeBook.MakeRecipe(drink);
+            UnavailableDrink(drink);
         }
+
+        private void UnavailableDrink(string drink) => _outputProvider($"Sorry bro, but we do not do {drink}");
     }
 }

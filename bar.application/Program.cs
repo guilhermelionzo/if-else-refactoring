@@ -1,7 +1,5 @@
 ﻿using System;
 
-//sonar token: 571fd96ddc93d6599add010ac0624e96a221c167
-
 namespace bar
 {
     public static class Program

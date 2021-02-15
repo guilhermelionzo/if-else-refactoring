@@ -22,19 +22,6 @@ namespace bar
                 {"juice",ServeJuice},
             };
         }
-
-        public RecipeBook(Func<string> inputProvider, Action<string> outputProvider)
-        {
-            _inputProvider = inputProvider;
-            _outputProvider = outputProvider;
-
-            _recipes = new Dictionary<string, Action>
-            {
-                {"beer",ServeBeer},
-                {"juice",ServeJuice},
-            };
-        }
-
         public void MakeRecipe(string drinkName) => _recipes[drinkName]();
         public IEnumerable<string> GetAvailableDrinkNames() => _recipes.Keys;
         private void ServeJuice() => _outputProvider("Here you go! Fresh and nice juice.");

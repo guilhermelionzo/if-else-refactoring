@@ -3,6 +3,6 @@ namespace bar.interfaces
     public interface IConsoleWriter
     {
         string ReadLine();
-        void WriteLine(string format);
+        void WriteLine(string value);
     }
 }

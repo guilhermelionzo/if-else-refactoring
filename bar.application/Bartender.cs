@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using bar.interfaces;
 
 namespace bar
 {
@@ -9,10 +10,10 @@ namespace bar
         private readonly Action<string> _outputProvider;
         private readonly RecipeBook _recipeBook;
 
-        public Bartender(Func<string> inputProvider, Action<string> outputProvider, RecipeBook recipeBook = null)
+        public Bartender(IConsoleWriter consoleWriter, RecipeBook recipeBook = null)
         {
-            _inputProvider = inputProvider;
-            _outputProvider = outputProvider;
+            _inputProvider = consoleWriter.ReadLine;
+            _outputProvider = consoleWriter.WriteLine;
             _recipeBook = recipeBook;
         }
 
@@ -23,8 +24,7 @@ namespace bar
             var drink = _inputProvider() ?? string.Empty;
 
             if (_recipeBook.GetAvailableDrinkNames().Contains(drink)) _recipeBook.MakeRecipe(drink);
-
-            UnavailableDrink(drink);
+            else UnavailableDrink(drink);
         }
 
         private void UnavailableDrink(string drink) => _outputProvider($"Sorry bro, but we do not do {drink}");

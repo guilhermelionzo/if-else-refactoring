@@ -6,11 +6,10 @@ namespace bar
     {
         static void Main(string[] args)
         {
-            var recipeBook = new RecipeBook(Console.ReadLine, Console.WriteLine);
-            var bartender = new Bartender(Console.ReadLine, Console.WriteLine, recipeBook);
+            var recipeBook = new RecipeBook(new ConsoleWriter());
+            var bartender = new Bartender(new ConsoleWriter(), recipeBook);
 
-            while (true)
-                bartender.AskForDrink();
+            while (true) bartender.AskForDrink();
         }
     }
 }

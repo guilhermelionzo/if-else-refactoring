@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using bar.interfaces;
 
 namespace bar
 {
@@ -9,6 +10,18 @@ namespace bar
         private readonly Func<string> _inputProvider;
         private readonly Action<string> _outputProvider;
         private bool isBelowEighteen(int age) => age >= 18;
+
+        public RecipeBook(IConsoleWriter consoleWriter)
+        {
+            _inputProvider = consoleWriter.ReadLine;
+            _outputProvider = consoleWriter.WriteLine;
+            
+            _recipes = new Dictionary<string, Action>
+            {
+                {"beer",ServeBeer},
+                {"juice",ServeJuice},
+            };
+        }
 
         public RecipeBook(Func<string> inputProvider, Action<string> outputProvider)
         {

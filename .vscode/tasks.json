@@ -50,6 +50,11 @@
                 "/p:CoverletOutput=./lcov.info"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "sonarqube",
+            "command": "docker build --network=host --no-cache .",
+            "type": "shell"
         }
     ]
 }
